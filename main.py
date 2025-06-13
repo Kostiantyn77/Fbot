@@ -34,11 +34,26 @@ def run_server():
 def run_bot():
     print("Fartcoin Trading Bot запускается...")
     send_telegram_message("🚀 Fartcoin Trading Bot запущен!")
-    client = Client(api_key='', api_secret='', testnet=True)
-    print("Успешное подключение к Binance (тестовое)")
+
+    try:
+        client = Client(api_key='', api_secret='', testnet=True)
+        client.API_URL = 'https://testnet.binance.vision/api'  # Добавь это, если testnet не работает
+        send_telegram_message("✅ Подключение к Binance Testnet успешно.")
+    except Exception as e:
+        send_telegram_message(f"❌ Ошибка подключения к Binance: {e}")
+        return
+
     while True:
-        # Здесь можно вставить основную логику
-        time.sleep(30)
+        try:
+            # Пример запроса к балансу или рынку
+            prices = client.get_symbol_ticker(symbol="BTCUSDT")
+            message = f"💹 Цена BTCUSDT: {prices['price']}"
+            print(message)
+            send_telegram_message(message)
+        except Exception as e:
+            send_telegram_message(f"⚠️ Ошибка при получении цены: {e}")
+
+        time.sleep(60)  # каждые 60 сек
 
 # --- Запуск бота и сервера параллельно ---
 if __name__ == '__main__':
