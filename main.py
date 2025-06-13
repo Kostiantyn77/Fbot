@@ -33,6 +33,7 @@ def run_server():
 # --- Трейдинг бот ---
 def run_bot():
     print("Fartcoin Trading Bot запускается...")
+    send_telegram_message("🚀 Fartcoin Trading Bot запущен!")
     client = Client(api_key='', api_secret='', testnet=True)
     print("Успешное подключение к Binance (тестовое)")
     while True:
