@@ -1,3 +1,20 @@
+import requests
+
+TELEGRAM_TOKEN = "7699731028:AAFfg5DPAY4r8JrF_sW2b5VKMPihwHgxu3w"
+TELEGRAM_CHAT_ID = "5071558424"
+
+def send_telegram_message(message):
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message
+    }
+    try:
+        response = requests.post(url, data=payload)
+        if response.status_code != 200:
+            print(f"Ошибка Telegram: {response.text}")
+    except Exception as e:
+        print(f"Ошибка отправки в Telegram: {e}")
 from flask import Flask
 from threading import Thread
 import time
