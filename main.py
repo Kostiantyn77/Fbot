@@ -53,7 +53,7 @@ def run_bot():
         except Exception as e:
             send_telegram_message(f"⚠️ Ошибка при получении цены: {e}")
 
-        time.sleep(60)  # каждые 60 сек
+        time.sleep(6000)  # каждые 60 сек
 
 # --- Запуск бота и сервера параллельно ---
 if __name__ == '__main__':
